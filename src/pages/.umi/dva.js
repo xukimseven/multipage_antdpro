@@ -22,6 +22,7 @@ export function _onCreate() {
   
   app.model({ namespace: 'global', ...(require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/models/global.js').default) });
 app.model({ namespace: 'login', ...(require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/models/login.js').default) });
+app.model({ namespace: 'routers', ...(require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/models/routers.js').default) });
 app.model({ namespace: 'setting', ...(require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/models/setting.js').default) });
 app.model({ namespace: 'user', ...(require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/models/user.js').default) });
   return app;

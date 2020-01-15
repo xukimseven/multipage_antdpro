@@ -26,17 +26,163 @@ const routes = [
       : require('../../layouts/BlankLayout').default,
     routes: [
       {
-        name: 'lite',
         path: '/',
         component: __IS_BROWSER
           ? _dvaDynamic({
               component: () =>
-                import(/* webpackChunkName: "p__lite" */ '../lite'),
+                import(/* webpackChunkName: "layouts__CustomLayout__CustomPageLayout" */ '../../layouts/CustomLayout/CustomPageLayout'),
               LoadingComponent: require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/components/PageLoading/index')
                 .default,
             })
-          : require('../lite').default,
-        exact: true,
+          : require('../../layouts/CustomLayout/CustomPageLayout').default,
+        routes: [
+          {
+            path: '/',
+            redirect: '/home',
+            exact: true,
+          },
+          {
+            path: '/home',
+            name: 'home',
+            component: __IS_BROWSER
+              ? _dvaDynamic({
+                  component: () =>
+                    import(/* webpackChunkName: "p__CustomPages__Home" */ '../CustomPages/Home'),
+                  LoadingComponent: require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/components/PageLoading/index')
+                    .default,
+                })
+              : require('../CustomPages/Home').default,
+            exact: true,
+          },
+          {
+            path: '/project',
+            name: 'project',
+            component: __IS_BROWSER
+              ? _dvaDynamic({
+                  component: () =>
+                    import(/* webpackChunkName: "p__CustomPages__Project" */ '../CustomPages/Project'),
+                  LoadingComponent: require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/components/PageLoading/index')
+                    .default,
+                })
+              : require('../CustomPages/Project').default,
+            exact: true,
+          },
+          {
+            path: '/task',
+            name: 'task',
+            routes: [
+              {
+                path: '/task/index',
+                name: 'index',
+                component: __IS_BROWSER
+                  ? _dvaDynamic({
+                      component: () =>
+                        import(/* webpackChunkName: "layouts__CustomLayout__CustomPageLayout" */ '../CustomPages/Task'),
+                      LoadingComponent: require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/components/PageLoading/index')
+                        .default,
+                    })
+                  : require('../CustomPages/Task').default,
+                exact: true,
+              },
+              {
+                path: '/task/test2',
+                name: 'test2',
+                routes: [
+                  {
+                    path: '/task/test2/page1',
+                    name: 'page1',
+                    component: __IS_BROWSER
+                      ? _dvaDynamic({
+                          component: () =>
+                            import(/* webpackChunkName: "layouts__CustomLayout__CustomPageLayout" */ '../CustomPages/Task/test2/test2page1'),
+                          LoadingComponent: require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/components/PageLoading/index')
+                            .default,
+                        })
+                      : require('../CustomPages/Task/test2/test2page1').default,
+                    exact: true,
+                  },
+                  {
+                    path: '/task/test2/page2',
+                    name: 'page2',
+                    component: __IS_BROWSER
+                      ? _dvaDynamic({
+                          component: () =>
+                            import(/* webpackChunkName: "layouts__CustomLayout__CustomPageLayout" */ '../CustomPages/Task/test2/test2page2'),
+                          LoadingComponent: require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/components/PageLoading/index')
+                            .default,
+                        })
+                      : require('../CustomPages/Task/test2/test2page2').default,
+                    exact: true,
+                  },
+                  {
+                    component: () =>
+                      React.createElement(
+                        require('/Users/amazingpiggy/projects/github/multipage_antdpro/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
+                          .default,
+                        { pagesPath: 'src/pages', hasRoutesInConfig: true },
+                      ),
+                  },
+                ],
+              },
+              {
+                component: () =>
+                  React.createElement(
+                    require('/Users/amazingpiggy/projects/github/multipage_antdpro/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
+                      .default,
+                    { pagesPath: 'src/pages', hasRoutesInConfig: true },
+                  ),
+              },
+            ],
+          },
+          {
+            path: '/system',
+            name: 'system',
+            routes: [
+              {
+                path: '/system/index',
+                name: 'index',
+                component: __IS_BROWSER
+                  ? _dvaDynamic({
+                      component: () =>
+                        import(/* webpackChunkName: "layouts__CustomLayout__CustomPageLayout" */ '../CustomPages/SystemPage'),
+                      LoadingComponent: require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/components/PageLoading/index')
+                        .default,
+                    })
+                  : require('../CustomPages/SystemPage').default,
+                exact: true,
+              },
+              {
+                path: '/system/test3',
+                name: 'test3',
+                component: __IS_BROWSER
+                  ? _dvaDynamic({
+                      component: () =>
+                        import(/* webpackChunkName: "layouts__CustomLayout__CustomPageLayout" */ '../CustomPages/SystemPage/test3'),
+                      LoadingComponent: require('/Users/amazingpiggy/projects/github/multipage_antdpro/src/components/PageLoading/index')
+                        .default,
+                    })
+                  : require('../CustomPages/SystemPage/test3').default,
+                exact: true,
+              },
+              {
+                component: () =>
+                  React.createElement(
+                    require('/Users/amazingpiggy/projects/github/multipage_antdpro/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
+                      .default,
+                    { pagesPath: 'src/pages', hasRoutesInConfig: true },
+                  ),
+              },
+            ],
+          },
+          {
+            component: () =>
+              React.createElement(
+                require('/Users/amazingpiggy/projects/github/multipage_antdpro/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
+                  .default,
+                { pagesPath: 'src/pages', hasRoutesInConfig: true },
+              ),
+          },
+        ],
       },
       {
         component: () =>
