@@ -54,24 +54,6 @@ export const routes = [
     ]
   },
 
-  // 系统配置
-  {
-    path: "/system",
-    component: "../layouts/CustomLayout/CustomPageLayout",
-    routes: [
-      {
-        path: "/system/index",
-        name: "index",
-        component: "./CustomPages/SystemPage"
-      },
-      {
-        path: "/system/test3",
-        name: "test3",
-        component: "./CustomPages/SystemPage/test3"
-      }
-    ]
-  },
-
   {
     path: "/",
     redirect: "/home"

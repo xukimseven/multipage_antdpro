@@ -3,130 +3,34 @@ import { Icon, Menu, Layout } from 'antd';
 import router from 'umi/router';
 import { connect } from 'dva';
 import _ from 'lodash';
+import { Tools } from '@/layouts/CustomLayout/tools';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-@connect(({ routers, loading }) => ({ routers, loading }))
-export default class CustomPageSide extends PureComponent {
-  state = {
-    routers: [
-      {
-        name: 'home',
-        title: '首页',
-        path: '/',
-        icon: 'home',
-        children: [],
-      },
-      {
-        name: 'project',
-        title: '项目',
-        path: '/project',
-        icon: 'project',
-        children: [],
-      },
-      {
-        name: 'task',
-        title: '任务',
-        path: '',
-        icon: 'book',
-        children: [
-          {
-            name: 'task_index',
-            title: '任务首页',
-            path: '/task/index',
-            icon: 'down',
-            children: [],
-          },
-          {
-            name: 'task_test2',
-            title: '任务测试页面',
-            path: '',
-            icon: 'home',
-            children: [
-              {
-                name: 'task_test2_page1',
-                title: '测试页面1',
-                path: '/task/test2/page1',
-                icon: 'project',
-                children: [],
-              },
-              {
-                name: 'task_test2_page2',
-                title: '测试页面2',
-                path: '/task/test2/page2',
-                icon: 'home',
-                children: [],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        name: 'system',
-        title: '系统',
-        path: '',
-        icon: 'edit',
-        children: [
-          {
-            name: 'system_index',
-            title: '系统首页',
-            path: '/system/index',
-            icon: 'down',
-            children: [],
-          },
-          {
-            name: 'system_test3',
-            title: '系统测试页面',
-            path: '/system/test3',
-            icon: 'home',
-            children: [],
-          },
-        ],
-      },
-    ],
-  };
+@connect(({ loading, routers, Test }) => ({ loading, routers, Test }))
+export default class BimPageSide extends PureComponent {
+  state = {};
 
   componentDidMount() {
-    this.makeRouterSave({
-      ...this.state.routers[0],
-    });
+    // this.props.dispatch({
+    //   type: 'Test/singleProvinceJson',
+    //   payload: {
+    //     province: '北京',
+    //     deep: 4,
+    //   },
+    //   callback: res => {
+    //     console.log('BimPageSide', res);
+    //   },
+    // });
   }
 
   jump = data => {
-    router.push(data.path);
-    this.makeRouterSave(data);
-  };
-
-  makeRouterSave = data => {
-    const {
-      routers: { routers },
-    } = this.props;
-    const { name } = data;
-    const check_route = _.filter(routers, d => d.name === name);
-    if (!check_route.length) {
-      this.saveEvent(
-        [
-          ...routers,
-          {
-            ...data,
-          },
-        ],
-        { ...data },
-      );
-    } else {
-      this.saveEvent([...routers], { ...data });
+    console.log('jump', data);
+    const { onJump } = this.props;
+    if (onJump) {
+      onJump(data);
     }
-  };
-
-  saveEvent = (routers, currentRouter) => {
-    this.props.dispatch({
-      type: 'routers/save',
-      payload: {
-        routers: [...routers],
-        currentRouter: { ...currentRouter },
-      },
-    });
   };
 
   render() {
@@ -134,9 +38,9 @@ export default class CustomPageSide extends PureComponent {
       collapsed,
       showLogo,
       theme,
+      sideData,
       routers: { currentRouter },
     } = this.props;
-    const { routers } = this.state;
 
     const getMenuItem = data => {
       return (
@@ -183,35 +87,17 @@ export default class CustomPageSide extends PureComponent {
       }
     };
 
-    const currentSelect = () => {
-      // console.log('===//////', routers, currentRouter);
-      let select = [];
-      for (let idx = 0; idx < routers.length; idx++) {
-        const route = routers[idx];
-        if (!route.children.length) {
-          if (currentRouter.path === route.path) {
-            select = [`${route.name}`];
-            break;
-          }
-        } else {
-          for (let i = 0; i < route.children.length; i++) {
-            const r = route.children[i];
-            if (!r.children.length) {
-              if (currentRouter.path === r.path) {
-                select = [`${r.name}`];
-                break;
-              }
-            } else {
-              const selectItem = _.find(r.children, d => d.path === currentRouter.path);
-              if (selectItem) {
-                select = [`${selectItem.name}`];
-              }
-            }
-          }
-        }
-      }
-
+    const getSelectedKeys = () => {
+      const { select } = Tools.getCurrentRouter(sideData, currentRouter.path);
       return select;
+    };
+
+    const getOpenKeys = () => {
+      const open = [];
+      sideData.map((s, idx) => {
+        open.push(s.name);
+      });
+      return open;
     };
 
     return (
@@ -237,13 +123,15 @@ export default class CustomPageSide extends PureComponent {
           <Menu
             theme={theme}
             mode="inline"
-            defaultSelectedKeys={['1']}
-            selectedKeys={currentSelect()}
+            defaultOpenKeys={getOpenKeys()}
+            selectedKeys={getSelectedKeys()}
             style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}
           >
-            {routers.map((route, idx) => {
-              return getMenu(route);
-            })}
+            {sideData.length
+              ? sideData.map((route, idx) => {
+                return getMenu(route);
+              })
+              : ''}
           </Menu>
         </Sider>
       </>

@@ -1,0 +1,43 @@
+@import '../../static/less/mixin';
+.headerRight {
+  .rect(auto, 100%);
+  padding: 0 10px;
+  .flex();
+
+  .userArea {
+    .rect(50px, 50px, 50px);
+    .flex();
+    background-color: @primary-5;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+  }
+}
+.userMenu {
+  .rect(170px, auto, 5px);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+
+  .menuBody {
+    .rect(100%, auto);
+    padding: 10px 0;
+    .menuItem {
+      .rect(100%, 40px);
+      padding: 0 10px;
+      .flex(row, flex-start);
+    }
+  }
+  .menuFooter {
+    .rect(100%, auto);
+    border-top: 1px solid #ebebeb;
+    .footerItem {
+      .rect(100%, 50px);
+      cursor: pointer;
+      transition-duration: 0.3s;
+      .flex();
+      &:hover {
+        color: @primary-5;
+      }
+    }
+  }
+}

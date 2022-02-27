@@ -28,7 +28,9 @@
     "start:no-ui": "cross-env UMI_UI=none umi dev",
     "build": "umi build",
     "startlite": "cross-env APP_TYPE=site UMI_ENV=lite PORT=8020 umi dev",
-    "buildlite": "cross-env UMI_ENV=lite umi build"
+    "buildlite": "cross-env UMI_ENV=lite umi build",
+    "startmulti": "cross-env APP_TYPE=site UMI_ENV=multi PORT=8020 umi dev",
+    "buildmulti": "cross-env UMI_ENV=multi umi build"
   },
   "husky": {
     "hooks": {

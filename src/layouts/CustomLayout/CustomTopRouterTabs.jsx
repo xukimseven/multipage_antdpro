@@ -8,14 +8,14 @@ import router from "umi/router";
 const { gap_normal, gap_small, flexCenter } = PageCssData;
 
 @connect(({ routers, loading }) => ({ routers, loading }))
-export default class CustomTopRouterTabs extends PureComponent {
+export default class BimTopRouterTabs extends PureComponent {
   state = {
     routers: [],
     currentRouter: {}
   };
 
   componentDidMount() {
-    console.log("componentDidMount", this.props);
+    // console.log('componentDidMount', this.props);
   }
 
   componentWillReceiveProps(nextProps, nextContext) {

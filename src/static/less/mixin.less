@@ -1,0 +1,64 @@
+@import '~antd/es/style/themes/default.less';
+
+.rect(@width;@height;@borderRadius:0) {
+  width: @width;
+  height: @height;
+  border-radius: @borderRadius;
+  box-sizing: border-box;
+}
+
+.flex(@flexDirection:row;@justifyContent:center;@alignItems:center) {
+  display: flex;
+  flex-direction: @flexDirection;
+  justify-content: @justifyContent;
+  align-items: @alignItems;
+}
+
+.positionCenter() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.marginRight {
+  margin-right: 10px;
+}
+.marginLeft {
+  margin-left: 30px;
+}
+
+.defaultFont {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.85);
+}
+.secondaryFont {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.linkFont {
+  font-size: 12px;
+  color: #1d90ff;
+  cursor: pointer;
+}
+
+.greenFont {
+  color: #039d12;
+}
+.grayFont {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.f-85 {
+  color: rgba(0, 0, 0, 0.85);
+}
+.f-65 {
+  color: rgba(0, 0, 0, 0.65);
+}
+.f-45 {
+  color: rgba(0, 0, 0, 0.45);
+}
+.f-35 {
+  color: rgba(0, 0, 0, 0.35);
+}
